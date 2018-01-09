@@ -19,7 +19,14 @@ The manager interface allows the user to:
 * Add inventory
 * Add new products
 
-### Author
+## Technologies:
+
+* Node.js
+* MySQL
+* Terminal/GitBash
+
+## Author:
 
 Laurentius Tirtarahardja
+
 _Copyright &copy; 2018 Laurentius Tirtarahardja_
