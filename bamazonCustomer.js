@@ -2,7 +2,7 @@
 let inquirer = require('inquirer')
 let mysql = require('mysql')
 
-// MySQL server parameters
+// MySQL connection
 let connection = mysql.createConnection({
   host: 'localhost',
   port: 8889,
