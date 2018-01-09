@@ -22,6 +22,8 @@ The manager interface allows the user to:
 ## Technologies:
 
 * Node.js
+* npm inquirer
+* npm mysql
 * MySQL
 * Terminal/GitBash
 
