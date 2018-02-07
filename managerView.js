@@ -24,7 +24,7 @@ function managerAction() {
           'Add to Inventory',
           'Add New Product',
         ],
-        filter: function(val) {
+        filter: function (val) {
           switch (val) {
             case 'View Products for Sale':
               return 'sale'
@@ -49,7 +49,7 @@ function managerAction() {
         },
       },
     ])
-    .then(function(input) {
+    .then(function (input) {
       switch (input.option) {
         case 'sale':
           displayInventory()
@@ -74,7 +74,7 @@ function managerAction() {
 function displayInventory() {
   queryStr = 'SELECT * FROM products'
 
-  connection.query(queryStr, function(err, data) {
+  connection.query(queryStr, function (err, data) {
     if (err) throw err
     console.log(
       'Existing Inventory: \n----------------------------------------\n'
@@ -98,7 +98,7 @@ function displayInventory() {
 function displayLowInventory() {
   queryStr = 'SELECT * FROM products WHERE stock_quantity < 10'
 
-  connection.query(queryStr, function(err, data) {
+  connection.query(queryStr, function (err, data) {
     if (err) throw err
 
     console.log(
@@ -160,12 +160,12 @@ function addInventory() {
         filter: Number,
       },
     ])
-    .then(function(input) {
+    .then(function (input) {
       let item = input.item_id
       let addQuantity = input.quantity
       let queryStr = 'SELECT * FROM products WHERE ?'
 
-      connection.query(queryStr, { item_id: item }, function(err, data) {
+      connection.query(queryStr, { item_id: item }, function (err, data) {
         if (err) throw err
         if (data.length === 0) {
           console.log('ERROR: Invalid Item ID. Please enter a valid Item ID.')
@@ -179,14 +179,14 @@ function addInventory() {
             ' WHERE item_id = ' +
             item
 
-          connection.query(updateQueryStr, function(err, data) {
+          connection.query(updateQueryStr, function (err, data) {
             if (err) throw err
             console.log(
               'Stock count for Item ID ' +
-                item +
-                ' has been updated to ' +
-                (productData.stock_quantity + addQuantity) +
-                '.\n----------------------------------------\n'
+              item +
+              ' has been updated to ' +
+              (productData.stock_quantity + addQuantity) +
+              '.\n----------------------------------------\n'
             )
             connection.end()
           })
@@ -219,22 +219,22 @@ function createNewProduct() {
         type: 'input',
         name: 'stock_quantity',
         message: 'How many items are being stocked?',
-        valifate: validateInteger,
+        validate: validateInteger,
       },
     ])
-    .then(function(input) {
+    .then(function (input) {
       console.log(
         'Adding New Item: \n    product_name = ' +
-          input.product_name +
-          '\n' +
-          '    department_name = ' +
-          input.department_name +
-          '\n' +
-          '    price = ' +
-          input.price +
-          '\n' +
-          '    stock_quantity = ' +
-          input.stock_quantity
+        input.product_name +
+        '\n' +
+        '    department_name = ' +
+        input.department_name +
+        '\n' +
+        '    price = ' +
+        input.price +
+        '\n' +
+        '    stock_quantity = ' +
+        input.stock_quantity
       )
       let queryStr = 'INSERT into products SET ?'
 
@@ -246,12 +246,12 @@ function createNewProduct() {
           price: input.price,
           stock_quantity: input.stock_quantity,
         },
-        function(err, results, fields) {
+        function (err, results, fields) {
           if (err) throw err
           console.log(
             'New product has been added to the inventory under Item ID ' +
-              results.insertId +
-              '.\n----------------------------------------\n'
+            results.insertId +
+            '.\n----------------------------------------\n'
           )
           connection.end()
         }
